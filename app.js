@@ -52,3 +52,61 @@ document.getElementById("resetBtn").addEventListener("click", () => {
     document.getElementById("pPhone").innerText = "Tel.: ...";
     document.getElementById("pWebsite").innerText = "www.firma.de";
 });
+
+function generateVCard() {
+    const name = document.getElementById("fullName").value || "";
+    const position = document.getElementById("position").value || "";
+    const location = document.getElementById("location").value || "";
+    const email = document.getElementById("email").value || "";
+    const mobile = document.getElementById("mobile").value || "";
+    const phone = document.getElementById("phone").value || "";
+    const website = document.getElementById("website").value || "";
+
+    const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+N:${name}
+TITLE:${position}
+ADR;WORK:${location}
+EMAIL:${email}
+TEL;CELL:${mobile}
+TEL;WORK:${phone}
+URL:${website}
+END:VCARD`;
+
+    return vcard;
+}
+
+
+// ----------------------
+// QR aktualisieren
+// ----------------------
+
+let qr;
+
+function updateQRCode() {
+    const container = document.getElementById("qrContainer");
+    container.innerHTML = ""; // alten QR löschen
+
+    const vcardData = generateVCard();
+
+    qr = new QRCode(container, {
+        text: vcardData,
+        width: 120,
+        height: 120
+    });
+}
+
+
+// ----------------------
+// QR bei jeder Änderung aktualisieren
+// ----------------------
+[
+    "fullName", "position", "location", "email",
+    "mobile", "phone", "website"
+].forEach(id => {
+    document.getElementById(id).addEventListener("input", updateQRCode);
+});
+
+// Initial erzeugen
+updateQRCode();
