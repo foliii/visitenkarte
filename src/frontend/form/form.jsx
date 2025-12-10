@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./style.css";
 
 // Formular wird hier aktualisiert wenn sich was ändert das macht UseState
 const Form = ({ onSubmit }) => {
