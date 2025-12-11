@@ -28,7 +28,9 @@ const Form = ({ onSubmit }) => {
         <h2 className="form-title">Personendaten</h2>
 
         <div className="form-group">
-          <label>Vorname:</label>
+          <label>
+            Vorname<span className="required-star">*</span>
+          </label>
           <input
             className="form-input"
             type="text"
@@ -40,7 +42,9 @@ const Form = ({ onSubmit }) => {
         </div>
 
         <div className="form-group">
-          <label>Nachname:</label>
+          <label>
+            Nachname<span className="required-star">*</span>
+          </label>
           <input
             className="form-input"
             type="text"
@@ -52,7 +56,9 @@ const Form = ({ onSubmit }) => {
         </div>
 
         <div className="form-group">
-          <label>Funktion:</label>
+          <label>
+            Funktion<span className="required-star">*</span>
+          </label>
           <input
             className="form-input"
             type="text"
