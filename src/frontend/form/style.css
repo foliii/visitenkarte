@@ -1,39 +1,85 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 
-.form-qr-layout {
+  background: radial-gradient(
+    circle at top,
+    #0D1526 0%,
+    #070B12 40%,
+    #020308 100%
+  );
+
+  color: #F5F7FA;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
   display: flex;
-  gap: 32px;
-  max-width: 960px;
-  margin: 40px auto;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.form-qr-layout {
+  position: relative;
+  display: flex;
+  gap: 48px;                 
+  width: 100%;               
+  max-width: 1400px;         
+  padding: 0 40px;           
+  margin: 0 auto;            
   align-items: flex-start;
 }
 
 
+.form-qr-layout::before {
+  content: "";
+  position: absolute;
+  inset: -40px -80px;
+  background: radial-gradient(circle at 20% 0%, rgba(47, 108, 207, 0.25), transparent 55%),
+              radial-gradient(circle at 80% 100%, rgba(35, 75, 150, 0.25), transparent 55%);
+  opacity: 0.9;
+  filter: blur(28px);
+  z-index: -1;
+  animation: glowPulse 7s ease-in-out infinite alternate;
+}
+
+/* Mobile: untereinander */
 @media (max-width: 820px) {
   .form-qr-layout {
     flex-direction: column;
+    padding: 0 16px;
+  }
+
+  .form-qr-layout::before {
+    inset: -40px -20px;
   }
 }
 
-
-/* Linke Box: Formular */
+/* Linke Box: Formular  */
 .form-container {
   flex: 1;
   max-width: 480px;
   padding: 28px 26px;
 
-  background: #0B111C;
+  background: rgba(5, 10, 18, 0.95); 
   border-radius: 14px;
 
   border: 1px solid #1F2A3A;
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.65),
-    inset 0 0 10px rgba(255, 255, 255, 0.04);
+    0 18px 40px rgba(0, 0, 0, 0.75),
+    inset 0 0 14px rgba(255, 255, 255, 0.03);
+
+  backdrop-filter: blur(10px);   
+  -webkit-backdrop-filter: blur(10px);
 
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: #F5F7FA;
 }
 
-/* Formular-Titel */
+/*  Formular-Titel  */
 .form-title {
   font-size: 22px;
   text-align: left;
@@ -92,7 +138,7 @@
   box-shadow: 0 0 0 2px rgba(47, 108, 207, 0.4);
 }
 
-/* Button */
+/* Button  */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -119,37 +165,41 @@
 
 .submit-btn:hover {
   background: linear-gradient(135deg, #223F6C, #3C7AF5);
-  box-shadow: 0 10px 24px rgba(47, 108, 207, 0.45);
+  box-shadow: 0 10px 24px rgba(47, 108, 207, 0.55);
 }
 
 .submit-btn:active {
   transform: scale(0.97);
 }
 
-/* Rechte Box: QR-Code / Visitenkarte */
+
+/* Rechte Box */
 
 .qr-container {
   flex: 1;
   max-width: 360px;
   padding: 24px 22px;
 
-  background: #0B111C;
+  background: rgba(5, 10, 18, 0.95);
   border-radius: 14px;
 
   border: 1px solid #1F2A3A;
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.65),
-    inset 0 0 10px rgba(255, 255, 255, 0.04);
+    0 18px 40px rgba(0, 0, 0, 0.75),
+    inset 0 0 14px rgba(255, 255, 255, 0.03);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   color: #F5F7FA;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .qr-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 18px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #DCE4F5;
 }
@@ -160,19 +210,46 @@
   min-height: 220px;
 
   border-radius: 12px;
-  border: 1px dashed #2F3D53;
-  background: radial-gradient(circle at top, #141B29, #070A11);
+  border: 1px solid #2F3D53;
+  background:
+    radial-gradient(circle at top, #192033, #070A11),
+    linear-gradient(135deg, rgba(47, 108, 207, 0.25), transparent);
 
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  animation: qrGlow 10s ease-in-out infinite alternate;
 }
 
 .qr-placeholder {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #7C8493;
+  color: #8A92A3;
   text-align: center;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes qrGlow {
+  0% {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    border-color: #2F3D53;
+  }
+  100% {
+    box-shadow: 0 18px 40px rgba(47, 108, 207, 0.55);
+    border-color: #3C7AF5;
+  }
 }
