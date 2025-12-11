@@ -1,99 +1,178 @@
-/* ---------- Formular-Container ---------- */
+
+.form-qr-layout {
+  display: flex;
+  gap: 32px;
+  max-width: 960px;
+  margin: 40px auto;
+  align-items: flex-start;
+}
+
+
+@media (max-width: 820px) {
+  .form-qr-layout {
+    flex-direction: column;
+  }
+}
+
+
+/* Linke Box: Formular */
 .form-container {
-  width: 100%;
+  flex: 1;
   max-width: 480px;
-  margin: 50px auto;
-  padding: 32px;
-  
-  background: rgba(255, 255, 255, 0.6);     
-  backdrop-filter: blur(6px);               
-  
+  padding: 28px 26px;
+
+  background: #0B111C;
   border-radius: 14px;
-  border: 1px solid rgba(15, 61, 110, 0.2); 
-  
-  box-shadow: 
-    0 4px 20px rgba(0,0,0,0.08),
-    inset 0 0 12px rgba(255,255,255,0.3);
 
-  font-family: "Inter", sans-serif;
+  border: 1px solid #1F2A3A;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.65),
+    inset 0 0 10px rgba(255, 255, 255, 0.04);
+
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #F5F7FA;
 }
 
-/* ---------- Titel ---------- */
+/* Formular-Titel */
 .form-title {
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: 28px;
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 22px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #0F3D6E;
+  letter-spacing: 0.6px;
+  color: #E5ECF9;
 }
 
-/* ---------- Gruppen ---------- */
+/* Gruppen */
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .form-group label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  margin-bottom: 8px;
-  color: #1A1D23;
-  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+  color: #D3D7E0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-/* ---------- Inputs ---------- */
+/* Inputs */
 .form-input {
-  padding: 12px 14px;
-  font-size: 15px;
+  padding: 10px 12px;
+  font-size: 14px;
 
-  border: 1px solid #C7CBD1;
-  border-radius: 10px;
+  border-radius: 8px;
+  border: 1px solid #2A3649;
 
-  background: linear-gradient(135deg, #FFFFFF, #F4F6F8);
-  
-  transition: 
-    border 0.2s ease,
+  background: #141B28;
+  color: #F5F7FA;
+
+  outline: none;
+  transition:
+    border-color 0.2s ease,
     box-shadow 0.25s ease,
     background 0.25s ease;
 }
 
+.form-input::placeholder {
+  color: #7C8493;
+}
+
 .form-input:hover {
-  background: #FFFFFF;
-  border-color: #1E5AA8;
+  background: #171E2D;
+  border-color: #2F6CCF;
 }
 
 .form-input:focus {
-  background: #FFFFFF;
-  border-color: #1E5AA8;
-  box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.2);
-  outline: none;
+  background: #171E2D;
+  border-color: #2F6CCF;
+  box-shadow: 0 0 0 2px rgba(47, 108, 207, 0.4);
 }
 
-/* ---------- Button ---------- */
+/* Button */
 .submit-btn {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
+  margin-top: 6px;
+
   border-radius: 10px;
   border: none;
 
-  background: linear-gradient(135deg, #0F3D6E, #1E5AA8);
-  color: white;
+  background: linear-gradient(135deg, #1C355A, #2F6CCF);
+  color: #FFFFFF;
 
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 
-  letter-spacing: 0.4px;
-  transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition:
+    background 0.25s,
+    transform 0.12s,
+    box-shadow 0.25s;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #124579, #2A6EC2);
-  box-shadow: 0 4px 12px rgba(30, 90, 168, 0.3);
+  background: linear-gradient(135deg, #223F6C, #3C7AF5);
+  box-shadow: 0 10px 24px rgba(47, 108, 207, 0.45);
 }
 
 .submit-btn:active {
   transform: scale(0.97);
+}
+
+/* Rechte Box: QR-Code / Visitenkarte */
+
+.qr-container {
+  flex: 1;
+  max-width: 360px;
+  padding: 24px 22px;
+
+  background: #0B111C;
+  border-radius: 14px;
+
+  border: 1px solid #1F2A3A;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.65),
+    inset 0 0 10px rgba(255, 255, 255, 0.04);
+
+  color: #F5F7FA;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.qr-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #DCE4F5;
+}
+
+/* Bereich für QR-Code / Visitenkarte */
+.qr-box {
+  width: 100%;
+  min-height: 220px;
+
+  border-radius: 12px;
+  border: 1px dashed #2F3D53;
+  background: radial-gradient(circle at top, #141B29, #070A11);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.qr-placeholder {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #7C8493;
+  text-align: center;
 }
