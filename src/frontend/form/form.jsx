@@ -11,23 +11,71 @@ const Form = ({ onSubmit }) => {
     email: ''
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    // Fehlerzustand für Pflichtfelder
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    position: ''
+  });
 
-  const handleSubmit = (e) => {
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setFormData({ ...formData, [name]: value });
+
+  // Fehler für dieses Feld zurücksetzen, sobald der User tippt
+  setErrors((prev) => ({
+    ...prev,
+    [name]: ''   // falls es dafür einen Fehler gab, löschen
+  }));
+};
+
+ const handleSubmit = (e) => {
     e.preventDefault();
+
+    // einfache Pflichtfeldprüfung
+    const newErrors = {};
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'Bitte Vornamen eingeben.';
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Bitte Nachnamen eingeben.';
+    }
+    if (!formData.position.trim()) {
+      newErrors.position = 'Bitte Funktion eingeben.';
+    }
+
+
+    // Fehler im State speichern
+    setErrors((prev) => ({
+      ...prev,
+      ...newErrors
+    }));
+
+    // wenn Fehler vorhanden, Formular nicht absenden
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+
     onSubmit(formData);
   };
-
  return (
     <div className="form-qr-layout">
       {/* Linke Box: Formulardaten */}
-      <form className="form-container" onSubmit={handleSubmit}>
-        <h2 className="form-title">Personendaten</h2>
+      <form
+        className="form-container"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+    <h2 className="form-title">Personendaten</h2>
 
-        <div className="form-group">
+        {/* Hinweis für Pflichtfelder */}
+        <p className="required-hint">
+          <span className="required-star">*</span> Pflichtfeld
+        </p>
+
+        <div className={`form-group ${errors.firstName ? 'has-error' : ''}`}> {/* has-error */}
           <label>
             Vorname<span className="required-star">*</span>
           </label>
@@ -39,9 +87,13 @@ const Form = ({ onSubmit }) => {
             onChange={handleChange}
             required
           />
+        {/* Fehlermeldung */}
+          {errors.firstName && (
+            <span className="error-text">{errors.firstName}</span>
+          )}
         </div>
 
-        <div className="form-group">
+        <div className={`form-group ${errors.lastName ? 'has-error' : ''}`}> {/* has-error */}
           <label>
             Nachname<span className="required-star">*</span>
           </label>
@@ -53,9 +105,13 @@ const Form = ({ onSubmit }) => {
             onChange={handleChange}
             required
           />
+        {/* Fehlermeldung */}
+          {errors.lastName && (
+            <span className="error-text">{errors.lastName}</span>
+          )}
         </div>
 
-        <div className="form-group">
+        <div className={`form-group ${errors.position ? 'has-error' : ''}`}> {/* has-error */}
           <label>
             Funktion<span className="required-star">*</span>
           </label>
@@ -67,6 +123,10 @@ const Form = ({ onSubmit }) => {
             onChange={handleChange}
             required
           />
+        {/* Fehlermeldung */}
+          {errors.position && (
+            <span className="error-text">{errors.position}</span>
+          )}
         </div>
 
         <div className="form-group">
