@@ -1,0 +1,99 @@
+/* ---------- Formular-Container ---------- */
+.form-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 32px;
+  
+  background: rgba(255, 255, 255, 0.6);     
+  backdrop-filter: blur(6px);               
+  
+  border-radius: 14px;
+  border: 1px solid rgba(15, 61, 110, 0.2); 
+  
+  box-shadow: 
+    0 4px 20px rgba(0,0,0,0.08),
+    inset 0 0 12px rgba(255,255,255,0.3);
+
+  font-family: "Inter", sans-serif;
+}
+
+/* ---------- Titel ---------- */
+.form-title {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #0F3D6E;
+}
+
+/* ---------- Gruppen ---------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #1A1D23;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Inputs ---------- */
+.form-input {
+  padding: 12px 14px;
+  font-size: 15px;
+
+  border: 1px solid #C7CBD1;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #FFFFFF, #F4F6F8);
+  
+  transition: 
+    border 0.2s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.form-input:hover {
+  background: #FFFFFF;
+  border-color: #1E5AA8;
+}
+
+.form-input:focus {
+  background: #FFFFFF;
+  border-color: #1E5AA8;
+  box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.2);
+  outline: none;
+}
+
+/* ---------- Button ---------- */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, #0F3D6E, #1E5AA8);
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+
+  letter-spacing: 0.4px;
+  transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #124579, #2A6EC2);
+  box-shadow: 0 4px 12px rgba(30, 90, 168, 0.3);
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}

@@ -20,38 +20,47 @@ const Form = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Vorname:
+    <form className="form-container" onSubmit={handleSubmit}>
+      <h2 className="form-title">Personendaten</h2>
+      <div className="form-group">
+        <label>Vorname:</label>
         <input
+          className="form-input"
           type="text"
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
           required
         />
-      </label>
-      <label>
-        Nachname:
+      </div>
+
+      <div className="form-group">
+        <label>Nachname:</label>
         <input
+          className="form-input"
           type="text"
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
           required
         />
-      </label>
-      <label>
-        Funktion:
+      </div>
+
+      <div className="form-group">
+        <label>Funktion:</label>
         <input
+          className="form-input"
           type="text"
           name="position"
           value={formData.position}
           onChange={handleChange}
           required
         />
-      </label>
-      <button type="submit">Speichern</button>
+      </div>
+
+      <button type="submit" className="submit-btn">
+        Speichern
+      </button>
     </form>
   );
 };
