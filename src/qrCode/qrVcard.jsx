@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import QRCode from 'qrcode';
-import "style.css";
+import "./style.css";
 
 const QRCodeComponent = ({ data }) => {
   const canvasRef = useRef(null);
