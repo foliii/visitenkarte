@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
 import Form from './form/form';
-import QRCodeComponent from '../qrCode/qrVcard';
+import Visitenkarte from './preview/visitenkarte';
 
 const App = () => {
-  const [formData, setFormData] = useState({  //Use State verwaltet den Zustand der Komponente, wenn sich was ändert wird diese dann angepasst
-    firstName: '',
-    lastName: '',
-    position: ''
-  });
+  const [formData, setFormData] = useState(null);
 
-  const handleFormSubmit = (data) => { //Die Eingegebenen Dateien werden hier im Zustand gespeichert
+  const handleFormSubmit = (data) => {
     setFormData(data);
   };
 
   return (
-    <div>
-      <h1>Visitenkarte</h1>
+    <div className="form-qr-layout">
+      {/* links: Formular */}
       <Form onSubmit={handleFormSubmit} />
-      <QRCodeComponent data={formData} /> /*QR Code wird anhand der aktuellen formData Daten generiert */
+
+      {/* rechts: EINZIGE Vorschau */}
+      <div className="qr-container">
+        <h2 className="qr-title">Visitenkarte</h2>
+
+        <div className="qr-box">
+          {formData ? (
+            <Visitenkarte data={formData} />
+          ) : (
+            <span className="qr-placeholder">
+              Vorschau der Visitenkarte
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
