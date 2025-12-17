@@ -7,7 +7,8 @@ const Form = ({ onSubmit }) => {
     lastName: '',
     position: '',
     phone: '',
-    email: ''
+    email: '',
+    qrType: 'vcard' 
   });
 
   const [errors, setErrors] = useState({
@@ -42,12 +43,8 @@ const Form = ({ onSubmit }) => {
 
   return (
     <div className="form-qr-layout">
-      {/* Linke Box: Formulardaten */}
       <form className="form-container" onSubmit={handleSubmit} noValidate>
         <h2 className="form-title">Personendaten</h2>
-        <p className="required-hint">
-          <span className="required-star">*</span> Pflichtfeld
-        </p>
 
         <div className={`form-group ${errors.firstName ? 'has-error' : ''}`}>
           <label>Vorname<span className="required-star">*</span></label>
@@ -75,6 +72,23 @@ const Form = ({ onSubmit }) => {
         <div className="form-group">
           <label>E-Mail:</label>
           <input className="form-input" type="email" name="email" value={formData.email} onChange={handleChange} />
+        </div>
+
+        {/* 👇 NEU: QR-Code-Art */}
+        <div className="form-group">
+          <label>QR-Code-Art:</label>
+          <select
+            className="form-input"
+            name="qrType"
+            value={formData.qrType}
+            onChange={handleChange}
+          >
+            <option value="vcard">Kontakt (vCard)</option>
+            <option value="mail">E-Mail</option>
+            <option value="url">Webseite</option>
+            <option value="location">Standort</option>
+            <option value="event">Event</option>
+          </select>
         </div>
 
         <button type="submit" className="submit-btn">Speichern</button>
