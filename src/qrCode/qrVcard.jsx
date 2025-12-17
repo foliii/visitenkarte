@@ -11,15 +11,17 @@ const QRCodeComponent = ({ data }) => {
 
     switch (data.qrType) {
       case 'mail':
+        if (!data.email) return;
         qrContent = `mailto:${data.email}`;
         break;
 
       case 'url':
-        qrContent = 'https://www.mosbach.dhbw.de/'; 
+        if (!data.url) return;
+        qrContent = data.url;
         break;
 
       case 'location':
-        qrContent = 'geo:49.3536,9.1459'; 
+        qrContent = 'geo:49.3536,9.1459';
         break;
 
       case 'event':
@@ -56,7 +58,15 @@ END:VCARD
         if (error) console.error(error);
       }
     );
-  }, [data]);
+  }, [
+    data.firstName,
+    data.lastName,
+    data.position,
+    data.phone,
+    data.email,
+    data.url,
+    data.qrType
+  ]);
 
   return <canvas ref={canvasRef}></canvas>;
 };
