@@ -8,7 +8,8 @@ const Form = ({ onSubmit }) => {
     position: '',
     phone: '',
     email: '',
-    qrType: 'vcard'
+    qrType: 'vcard',
+    url: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -43,6 +44,10 @@ const Form = ({ onSubmit }) => {
 
     if (!formData.email.trim())
       newErrors.email = 'Bitte E-Mail-Adresse eingeben.';
+
+    if (formData.qrType === 'url' && !formData.url.trim()) {
+      newErrors.url = 'Bitte eine gültige URL eingeben.';
+    }
 
     setErrors(newErrors);
 
@@ -136,6 +141,22 @@ const Form = ({ onSubmit }) => {
           <option value="event">Event</option>
         </select>
       </div>
+
+      {/* URL – nur bei QR-Code-Art "url" */}
+      {formData.qrType === 'url' && (
+        <div className={`form-group ${errors.url ? 'has-error' : ''}`}>
+          <label>Webseite<span className="required-star">*</span></label>
+          <input
+            className="form-input"
+            type="url"
+            name="url"
+            placeholder="https://www.beispiel.de"
+            value={formData.url}
+            onChange={handleChange}
+          />
+          {errors.url && <span className="error-text">{errors.url}</span>}
+        </div>
+      )}
 
       <button type="submit" className="submit-btn">Speichern</button>
     </form>
