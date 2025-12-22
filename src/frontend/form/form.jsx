@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import "./style.css";
 
 const nameRegex = /^[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}$/;
-const positionRegex = /^[A-Za-zÀ-ÿ0-9ßäöüÄÖÜ\-&/().,\s]{2,60}$/;
 const phoneRegex = /^\+?[0-9\s\-()/]{6,20}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const urlRegex = /^(https?:\/\/)(www\.)?[^\s$.?#].[^\s]*$/i;
 
+const POSITION_OPTIONS = [
+  'Verkaufsberater',
+  'Kundendienstleiter',
+  'Werkstattleiter',
+  'Fuhrparkmanager',
+  'Marketingmanager',
+  'Geschäftsführung',
+  'Assistenz der Geschäftsführung'
+];
 
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -45,8 +53,8 @@ const Form = ({ onSubmit }) => {
       newErrors.lastName = 'Bitte gültigen Nachnamen eingeben (mind. 2 Buchstaben).';
     }
 
-    if (!positionRegex.test(formData.position.trim())) {
-      newErrors.position = 'Bitte gültige Funktion eingeben.';
+     if (!POSITION_OPTIONS.includes(formData.position)) {
+      newErrors.position = 'Bitte eine Funktion auswählen.';
     }
 
     if (!phoneRegex.test(formData.phone.trim())) {
@@ -104,18 +112,22 @@ const Form = ({ onSubmit }) => {
         {errors.lastName && <span className="error-text">{errors.lastName}</span>}
       </div>
 
-      {/* Funktion */}
+        {/* Funktion (Dropdown) */}
       <div className={`form-group ${errors.position ? 'has-error' : ''}`}>
         <label>Funktion<span className="required-star">*</span></label>
-        <input
+        <select
           className="form-input"
-          type="text"
           name="position"
           value={formData.position}
           onChange={handleChange}
-          pattern="[A-Za-zÀ-ÿ0-9ßäöüÄÖÜ\-&/().,\s]{2,60}"
-          title="Mindestens 2 Zeichen"
-        />
+        >
+          <option value="">Bitte auswählen</option>
+          {POSITION_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
         {errors.position && <span className="error-text">{errors.position}</span>}
       </div>
 
