@@ -32,28 +32,35 @@ const Form = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     const newErrors = {};
 
-    if (!formData.firstName.trim())
+    if (!nameRegex.test(formData.firstName.trim())) {
       newErrors.firstName = 'Bitte gültigen Vornamen eingeben (mind. 2 Buchstaben).';
+    }
 
-    if (!formData.lastName.trim())
+    if (!nameRegex.test(formData.lastName.trim())) {
       newErrors.lastName = 'Bitte gültigen Nachnamen eingeben (mind. 2 Buchstaben).';
+    }
 
-    if (!formData.position.trim())
+    if (!positionRegex.test(formData.position.trim())) {
       newErrors.position = 'Bitte gültige Funktion eingeben.';
+    }
 
-    if (!formData.phone.trim())
+    if (!phoneRegex.test(formData.phone.trim())) {
       newErrors.phone = 'Bitte gültige Telefonnummer eingeben.';
+    }
 
-    if (!formData.email.trim())
+    if (!emailRegex.test(formData.email.trim())) {
       newErrors.email = 'Bitte gültige E-Mail-Adresse eingeben.';
+    }
 
-    if (formData.qrType === 'url' && !formData.url.trim()) {
-      newErrors.url = 'Bitte eine gültige URL inkl. https:// eingeben.';
+    if (formData.qrType === 'url') {
+      if (!urlRegex.test(formData.url.trim())) {
+        newErrors.url = 'Bitte eine gültige URL inkl. https:// eingeben.';
+      }
     }
 
     setErrors(newErrors);
