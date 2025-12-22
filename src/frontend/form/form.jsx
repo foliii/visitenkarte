@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import "./style.css";
 
+const nameRegex = /^[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}$/;
+const positionRegex = /^[A-Za-zÀ-ÿ0-9ßäöüÄÖÜ\-&/().,\s]{2,60}$/;
+const phoneRegex = /^\+?[0-9\s\-()/]{6,20}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const urlRegex = /^(https?:\/\/)(www\.)?[^\s$.?#].[^\s]*$/i;
+
+
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -31,22 +38,22 @@ const Form = ({ onSubmit }) => {
     const newErrors = {};
 
     if (!formData.firstName.trim())
-      newErrors.firstName = 'Bitte Vornamen eingeben.';
+      newErrors.firstName = 'Bitte gültigen Vornamen eingeben (mind. 2 Buchstaben).';
 
     if (!formData.lastName.trim())
-      newErrors.lastName = 'Bitte Nachnamen eingeben.';
+      newErrors.lastName = 'Bitte gültigen Nachnamen eingeben (mind. 2 Buchstaben).';
 
     if (!formData.position.trim())
-      newErrors.position = 'Bitte Funktion eingeben.';
+      newErrors.position = 'Bitte gültige Funktion eingeben.';
 
     if (!formData.phone.trim())
-      newErrors.phone = 'Bitte Telefonnummer eingeben.';
+      newErrors.phone = 'Bitte gültige Telefonnummer eingeben.';
 
     if (!formData.email.trim())
-      newErrors.email = 'Bitte E-Mail-Adresse eingeben.';
+      newErrors.email = 'Bitte gültige E-Mail-Adresse eingeben.';
 
     if (formData.qrType === 'url' && !formData.url.trim()) {
-      newErrors.url = 'Bitte eine gültige URL eingeben.';
+      newErrors.url = 'Bitte eine gültige URL inkl. https:// eingeben.';
     }
 
     setErrors(newErrors);
@@ -69,6 +76,8 @@ const Form = ({ onSubmit }) => {
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
+          pattern="[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}"
+          title="Mindestens 2 Buchstaben, keine Zahlen"
         />
         {errors.firstName && <span className="error-text">{errors.firstName}</span>}
       </div>
@@ -82,6 +91,8 @@ const Form = ({ onSubmit }) => {
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
+          pattern="[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}"
+          title="Mindestens 2 Buchstaben, keine Zahlen"
         />
         {errors.lastName && <span className="error-text">{errors.lastName}</span>}
       </div>
@@ -95,6 +106,8 @@ const Form = ({ onSubmit }) => {
           name="position"
           value={formData.position}
           onChange={handleChange}
+          pattern="[A-Za-zÀ-ÿ0-9ßäöüÄÖÜ\-&/().,\s]{2,60}"
+          title="Mindestens 2 Zeichen"
         />
         {errors.position && <span className="error-text">{errors.position}</span>}
       </div>
@@ -108,6 +121,8 @@ const Form = ({ onSubmit }) => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
+          pattern="\+?[0-9\s\-()/]{6,20}"
+          title="Ziffern, +, -, Leerzeichen erlaubt"
         />
         {errors.phone && <span className="error-text">{errors.phone}</span>}
       </div>
