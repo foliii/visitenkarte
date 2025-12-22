@@ -1,20 +1,28 @@
 import React from 'react';
 import QRCodeComponent from '../../qrCode/qrVcard';
 
-const Visitenkarte = ({ data }) => {
+const Visitenkarte = ({ data, design, onDesignChange }) => {
   if (!data) return null;
 
-  return (
+  const fontSizeMap = {
+    small: '12px',
+    medium: '16px',
+    large: '20px'
+  };
+
+
+ return (
     <div
       style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        width: '100%',
-        gap: '24px'
+        gap: '24px',
+        fontFamily: design.fontFamily,
+        fontSize: fontSizeMap[design.fontSize]
       }}
     >
-      {/* Linke Seite: Text */}
+      {/* Linke Seite */}
       <div>
         <div style={{ fontWeight: '600', marginBottom: '4px' }}>
           {data.firstName} {data.lastName}
@@ -24,16 +32,11 @@ const Visitenkarte = ({ data }) => {
           {data.position}
         </div>
 
-        {data.phone && (
-          <div>{data.phone}</div>
-        )}
-
-        {data.email && (
-          <div>{data.email}</div>
-        )}
+        {data.phone && <div>{data.phone}</div>}
+        {data.email && <div>{data.email}</div>}
       </div>
 
-      {/* Rechte Seite: QR-Code */}
+      {/* Rechte Seite */}
       <div>
         <QRCodeComponent data={data} />
       </div>
