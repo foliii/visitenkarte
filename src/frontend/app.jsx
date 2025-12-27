@@ -12,7 +12,6 @@ const App = () => {
     fontSize: "medium",
   });
 
-  // Ref zeigt NUR auf die Preview
   const previewRef = useRef(null);
 
   const handleFormSubmit = (data) => {
@@ -49,7 +48,6 @@ const App = () => {
 
   return (
     <div className="form-qr-layout">
-      {/* LINKS: Formular + Export Button */}
       <div className="left-col">
         <Form onSubmit={handleFormSubmit} />
 
@@ -64,13 +62,12 @@ const App = () => {
         )}
       </div>
 
-      {/* RECHTS: Vorschau + Design */}
       <div className="qr-container">
         <h2 className="qr-title">Visitenkarte</h2>
 
         <div className="qr-box">
           {formData ? (
-            <div ref={previewRef}>
+            <div className="preview-wrap" ref={previewRef}>
               <Visitenkarte data={formData} design={design} />
             </div>
           ) : (
@@ -80,7 +77,7 @@ const App = () => {
 
         {formData && (
           <div className="design-card">
-            <h3>Design der Visitenkarte</h3>
+            <h3 className="design-title">Design der Visitenkarte</h3>
 
             <div className="design-row">
               <label>Schriftart</label>
