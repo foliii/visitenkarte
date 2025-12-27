@@ -1,51 +1,83 @@
-import React, { useState } from 'react';
-import Form from './form/form';
-import Visitenkarte from './preview/visitenkarte';
+import React, { useRef, useState } from "react";
+import html2canvas from "html2canvas";
+
+import Form from "./form/form";
+import Visitenkarte from "./preview/visitenkarte";
 
 const App = () => {
   const [formData, setFormData] = useState(null);
 
   const [design, setDesign] = useState({
-    fontFamily: 'Arial',
-    fontSize: 'medium'
+    fontFamily: "Arial",
+    fontSize: "medium",
   });
+
+  // Ref zeigt NUR auf die Preview
+  const previewRef = useRef(null);
 
   const handleFormSubmit = (data) => {
     setFormData(data);
   };
 
-const handleDesignChange = (e) => {
+  const handleDesignChange = (e) => {
     const { name, value } = e.target;
     setDesign((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-return (
-    <div className="form-qr-layout">
-      {/* links: Formular */}
-      <Form onSubmit={handleFormSubmit} />
+  const downloadPreviewAsPng = async () => {
+    if (!previewRef.current) return;
 
-      {/* rechts: Vorschau + Design */}
+    const canvas = await html2canvas(previewRef.current, {
+      backgroundColor: "#ffffff",
+      scale: 3,
+      useCORS: true,
+      logging: false,
+    });
+
+    const pngUrl = canvas.toDataURL("image/png");
+
+    const link = document.createElement("a");
+    link.href = pngUrl;
+    link.download = "visitenkarte.png";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  return (
+    <div className="form-qr-layout">
+      {/* LINKS: Formular + Export Button */}
+      <div className="left-col">
+        <Form onSubmit={handleFormSubmit} />
+
+        {formData && (
+          <button
+            type="button"
+            className="export-btn"
+            onClick={downloadPreviewAsPng}
+          >
+            Visitenkarte als PNG herunterladen
+          </button>
+        )}
+      </div>
+
+      {/* RECHTS: Vorschau + Design */}
       <div className="qr-container">
         <h2 className="qr-title">Visitenkarte</h2>
 
-        {/* Vorschau */}
         <div className="qr-box">
           {formData ? (
-            <Visitenkarte
-              data={formData}
-              design={design}
-            />
+            <div ref={previewRef}>
+              <Visitenkarte data={formData} design={design} />
+            </div>
           ) : (
-            <span className="qr-placeholder">
-              Vorschau der Visitenkarte
-            </span>
+            <span className="qr-placeholder">Vorschau der Visitenkarte</span>
           )}
         </div>
 
-        {/*DESIGN Änderungen*/}
         {formData && (
           <div className="design-card">
             <h3>Design der Visitenkarte</h3>
