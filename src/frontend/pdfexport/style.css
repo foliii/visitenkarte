@@ -1,0 +1,70 @@
+/* Container für beide Buttons */
+.export-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Basisstil für beide Buttons */
+.export-btn {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid #2A3649;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.12s ease,
+    border-color 0.25s ease;
+}
+
+/* Primary: wie der SPEICHERN-Button */
+.export-btn--primary {
+  background: linear-gradient(135deg, #1C355A, #2F6CCF);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px rgba(47, 108, 207, 0.45);
+}
+
+.export-btn--primary:hover {
+  background: linear-gradient(135deg, #223F6C, #3C7AF5);
+  box-shadow: 0 12px 28px rgba(47, 108, 207, 0.65);
+}
+
+.export-btn--primary:active {
+  transform: scale(0.97);
+}
+
+/* Secondary: „Outline“-Variante in Blau */
+.export-btn--secondary {
+  background: transparent;
+  color: #E5ECF9;
+  border-color: #2F6CCF;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.export-btn--secondary:hover {
+  background: rgba(47, 108, 207, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+}
+
+.export-btn--secondary:active {
+  transform: scale(0.97);
+}
+
+/* Auf schmalen Screens etwas Luft nach unten */
+@media (max-width: 820px) {
+  .export-buttons {
+    margin-bottom: 12px;
+  }
+}
