@@ -17,9 +17,10 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px 0;
 }
+
+/* ===== LAYOUT ===== */
 
 .form-qr-layout {
   position: relative;
@@ -56,6 +57,8 @@ html, body {
   }
 }
 
+/* ===== FORM ===== */
+
 .form-container {
   flex: 1;
   max-width: 480px;
@@ -68,7 +71,6 @@ html, body {
     inset 0 0 14px rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #F5F7FA;
 }
 
 .form-title {
@@ -105,10 +107,6 @@ html, body {
   transition: border-color 0.2s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-.form-input::placeholder {
-  color: #7C8493;
-}
-
 .form-input:hover,
 .form-input:focus {
   background: #171E2D;
@@ -118,6 +116,8 @@ html, body {
 .form-input:focus {
   box-shadow: 0 0 0 2px rgba(47, 108, 207, 0.4);
 }
+
+/* ===== BUTTON ===== */
 
 .submit-btn {
   width: 100%;
@@ -144,6 +144,8 @@ html, body {
   transform: scale(0.97);
 }
 
+/* ===== PREVIEW (OHNE KARTE!) ===== */
+
 .qr-container {
   flex: 1;
   max-width: 360px;
@@ -156,7 +158,6 @@ html, body {
     inset 0 0 14px rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #F5F7FA;
 }
 
 .qr-title {
@@ -174,78 +175,27 @@ html, body {
   border-radius: 12px;
   border: 1px solid #2F3D53;
   background:
-    radial-gradient(circle at top, #192033, #070A11),
-    linear-gradient(135deg, rgba(47, 108, 207, 0.25), transparent);
+    radial-gradient(circle at top, #192033, #070A11);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   padding: 22px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-  animation: qrGlow 10s ease-in-out infinite alternate;
 }
 
-.qr-box .card-canvas {
+/* 👉 NUR DIE VORSCHAU SKALIEREN */
+.preview-wrap {
   width: 100%;
-  max-width: 520px;
-  aspect-ratio: 85 / 55;
-  background: #ffffff;
-  color: #0b1220;
-  border-radius: 16px;
-  border: 1px solid rgba(10, 20, 40, 0.12);
-  box-shadow:
-    0 18px 50px rgba(0,0,0,0.35),
-    0 2px 10px rgba(0,0,0,0.18);
-  padding: 18px 20px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 16px;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  transform: scale(0.75);
+  transform-origin: top center;
 }
 
-.qr-box .card-canvas .card-header {
-  grid-column: 1 / -1;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
+/* ===== STATES ===== */
 
-.qr-box .card-canvas .card-left,
-.qr-box .card-canvas .card-right {
-  position: static;
+.required-star {
+  color: #ff6b6b;
 }
-
-.qr-box .card-canvas .card-right {
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-.qr-box .card-canvas #qr {
-  width: 120px;
-  height: 120px;
-  background: #ffffff;
-  padding: 8px;
-  border-radius: 12px;
-  border: 1px solid rgba(10, 20, 40, 0.12);
-  box-sizing: border-box;
-}
-
-@keyframes glowPulse {
-  from { opacity: 0.7; transform: translateY(0); }
-  to   { opacity: 1;   transform: translateY(-8px); }
-}
-
-@keyframes qrGlow {
-  from {
-    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    border-color: #2F3D53;
-  }
-  to {
-    box-shadow: 0 18px 40px rgba(47,108,207,0.55);
-    border-color: #3C7AF5;
-  }
-}
-
-.required-star { color: #ff6b6b; }
 
 .has-error .form-input {
   border-color: #ff6b6b;
@@ -256,4 +206,11 @@ html, body {
   margin-top: 6px;
   font-size: 12px;
   color: #ff6b6b;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes glowPulse {
+  from { opacity: 0.7; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(-8px); }
 }
