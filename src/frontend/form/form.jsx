@@ -18,6 +18,7 @@ const POSITION_OPTIONS = [
 
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
+    salutation: 'frau',        // ✅ NEU
     firstName: '',
     lastName: '',
     position: '',
@@ -40,7 +41,7 @@ const Form = ({ onSubmit }) => {
     }));
   };
 
-    const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -53,7 +54,7 @@ const Form = ({ onSubmit }) => {
       newErrors.lastName = 'Bitte gültigen Nachnamen eingeben (mind. 2 Buchstaben).';
     }
 
-     if (!POSITION_OPTIONS.includes(formData.position)) {
+    if (!POSITION_OPTIONS.includes(formData.position)) {
       newErrors.position = 'Bitte eine Funktion auswählen.';
     }
 
@@ -82,6 +83,20 @@ const Form = ({ onSubmit }) => {
     <form className="form-container" onSubmit={handleSubmit} noValidate>
       <h2 className="form-title">Personendaten</h2>
 
+      {/* ANREDE */}
+      <div className="form-group">
+        <label>Anrede<span className="required-star">*</span></label>
+        <select
+          className="form-input"
+          name="salutation"
+          value={formData.salutation}
+          onChange={handleChange}
+        >
+          <option value="frau">Frau</option>
+          <option value="herr">Herr</option>
+        </select>
+      </div>
+
       {/* Vorname */}
       <div className={`form-group ${errors.firstName ? 'has-error' : ''}`}>
         <label>Vorname<span className="required-star">*</span></label>
@@ -91,8 +106,6 @@ const Form = ({ onSubmit }) => {
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
-          pattern="[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}"
-          title="Mindestens 2 Buchstaben, keine Zahlen"
         />
         {errors.firstName && <span className="error-text">{errors.firstName}</span>}
       </div>
@@ -106,13 +119,11 @@ const Form = ({ onSubmit }) => {
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
-          pattern="[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}"
-          title="Mindestens 2 Buchstaben, keine Zahlen"
         />
         {errors.lastName && <span className="error-text">{errors.lastName}</span>}
       </div>
 
-        {/* Funktion (Dropdown) */}
+      {/* Funktion */}
       <div className={`form-group ${errors.position ? 'has-error' : ''}`}>
         <label>Funktion<span className="required-star">*</span></label>
         <select
@@ -140,8 +151,6 @@ const Form = ({ onSubmit }) => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          pattern="\+?[0-9\s\-()/]{6,20}"
-          title="Ziffern, +, -, Leerzeichen erlaubt"
         />
         {errors.phone && <span className="error-text">{errors.phone}</span>}
       </div>
@@ -176,7 +185,6 @@ const Form = ({ onSubmit }) => {
         </select>
       </div>
 
-      {/* URL – nur bei QR-Code-Art "url" */}
       {formData.qrType === 'url' && (
         <div className={`form-group ${errors.url ? 'has-error' : ''}`}>
           <label>Webseite<span className="required-star">*</span></label>
@@ -184,7 +192,6 @@ const Form = ({ onSubmit }) => {
             className="form-input"
             type="url"
             name="url"
-            placeholder="https://www.beispiel.de"
             value={formData.url}
             onChange={handleChange}
           />

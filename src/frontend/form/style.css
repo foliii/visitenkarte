@@ -148,17 +148,20 @@ html, body {
 
 .qr-container {
   flex: 1;
-  max-width: 360px;
-  padding: 24px 22px;
+  max-width: 520px;
+  padding: 28px;
   background: rgba(5, 10, 18, 0.95);
   border-radius: 14px;
   border: 1px solid #1F2A3A;
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.75),
     inset 0 0 14px rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
+
 
 .qr-title {
   font-size: 16px;
@@ -170,24 +173,19 @@ html, body {
 }
 
 .qr-box {
-  width: 100%;
-  min-height: 220px;
-  border-radius: 12px;
-  border: 1px solid #2F3D53;
-  background:
-    radial-gradient(circle at top, #192033, #070A11);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 22px;
+  padding: 12px 0;
 }
+
 
 /* 👉 NUR DIE VORSCHAU SKALIEREN */
 .preview-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
-  transform: scale(0.75);
+  transform: scale(0.95);
   transform-origin: top center;
 }
 
