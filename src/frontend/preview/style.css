@@ -1,0 +1,16 @@
+/* REALE VISITENKARTE – NICHT RESPONSIVE */
+.card-canvas {
+  width: 340px;              /* entspricht ca. 85mm */
+  height: 220px;             /* entspricht ca. 55mm */
+  background: #ffffff;
+  color: #0b1220;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 20, 40, 0.15);
+  padding: 18px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+}
