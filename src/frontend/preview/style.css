@@ -1,16 +1,71 @@
 /* REALE VISITENKARTE – NICHT RESPONSIVE */
+
 .card-canvas {
-  width: 340px;              /* entspricht ca. 85mm */
-  height: 220px;             /* entspricht ca. 55mm */
+  width: 340px;              /* ca. 85mm */
+  height: 220px;             /* ca. 55mm */
   background: #ffffff;
   color: #0b1220;
   border-radius: 12px;
   border: 1px solid rgba(10, 20, 40, 0.15);
   padding: 18px 20px;
   box-sizing: border-box;
+
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
+
   font-family: Arial, sans-serif;
+}
+
+/* TEXTBEREICH */
+
+.card-canvas > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Name */
+.card-canvas > div:first-child > div:first-child {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+}
+
+/* Position */
+.card-canvas > div:first-child > div:nth-child(2) {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+
+/* Kontaktinfos */
+.card-canvas > div:first-child > div:nth-child(n+3) {
+  font-size: 13px;
+  line-height: 1.35;
+  opacity: 0.9;
+}
+
+/* QR-BEREICH */
+
+.card-qr {
+  width: 110px;
+  height: 110px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(10, 20, 40, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+/* QR selbst */
+.card-qr canvas,
+.card-qr img,
+.card-qr svg {
+  width: 100%;
+  height: 100%;
 }
