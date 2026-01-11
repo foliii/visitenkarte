@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import html2canvas from "html2canvas";
 
 import Form from "./form/form";
 import Visitenkarte from "./preview/visitenkarte";
+import ExportButtons from "./pdfexport/pdfexport";
 
 const App = () => {
   const [formData, setFormData] = useState(null);
@@ -26,40 +26,13 @@ const App = () => {
     }));
   };
 
-  const downloadPreviewAsPng = async () => {
-    if (!previewRef.current) return;
-
-    const canvas = await html2canvas(previewRef.current, {
-      backgroundColor: "#ffffff",
-      scale: 3,
-      useCORS: true,
-      logging: false,
-    });
-
-    const pngUrl = canvas.toDataURL("image/png");
-
-    const link = document.createElement("a");
-    link.href = pngUrl;
-    link.download = "visitenkarte.png";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-  };
-
   return (
     <div className="form-qr-layout">
       <div className="left-col">
         <Form onSubmit={handleFormSubmit} />
 
-        {formData && (
-          <button
-            type="button"
-            className="export-btn"
-            onClick={downloadPreviewAsPng}
-          >
-            Visitenkarte als PNG herunterladen
-          </button>
-        )}
+        {/* Export-Buttons (PNG + PDF), nur anzeigen wenn Daten vorhanden */}
+        <ExportButtons previewRef={previewRef} hasData={!!formData} />
       </div>
 
       <div className="qr-container">
