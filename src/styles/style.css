@@ -11,12 +11,19 @@
 
 body{
   margin:0;
-  background:var(--bg);
+  min-height:100vh;
   font-family:Inter, system-ui, sans-serif;
-  color:#222;
+  color:#F5F7FA;
+
+  background: radial-gradient(
+    circle at top,
+    #0D1526 0%,
+    #070B12 45%,
+    #020308 100%
+  );
 }
 
-/* ===== GENERISCHES LAYOUT ===== */
+/* GENERISCHES LAYOUT */
 
 header{
   background:white;
@@ -64,7 +71,7 @@ footer{
   padding:20px;
 }
 
-/* ===== FORM ELEMENTE (GLOBAL) ===== */
+/* FORM ELEMENTE (GLOBAL) */
 
 label{
   display:block;
@@ -101,7 +108,7 @@ textarea{
   resize:vertical;
 }
 
-/* ===== BUTTONS ===== */
+/* BUTTONS */
 
 button{
   border:none;
@@ -131,7 +138,7 @@ button.secondary:hover{
   background:#d7e7ff;
 }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 
 @media (max-width:900px){
   .wrap{
