@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./businesscard.css";
 import QRCodeComponent from "../../qrCode/qrVcard";
 import Logo from "../../assets/Logo_Autohaus.png";
 
@@ -22,8 +22,7 @@ const Visitenkarte = ({ data, design }) => {
 
   const fontSizeMap = {
     small: "13px",
-    medium: "15px", // bewusst kleiner als vorher
-    large: "18px",
+    medium: "15px",
   };
 
   const displayPosition =

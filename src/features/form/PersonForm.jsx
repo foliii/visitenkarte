@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./style.css";
+import "./form.css";
 
 const nameRegex = /^[A-Za-zÀ-ÿßäöüÄÖÜ\-'\s]{2,50}$/;
 const phoneRegex = /^\+?[0-9\s\-()/]{6,20}$/;
@@ -18,27 +18,23 @@ const POSITION_OPTIONS = [
 
 const Form = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    salutation: 'frau',        // ✅ NEU
+    salutation: 'frau',
     firstName: '',
     lastName: '',
     position: '',
     phone: '',
     email: '',
     qrType: 'vcard',
-    url: ''
+    url: '',
+    fontSize: 'medium' // 👉 Default & Maximum
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: ''
-    }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = (e) => {
@@ -66,14 +62,11 @@ const Form = ({ onSubmit }) => {
       newErrors.email = 'Bitte gültige E-Mail-Adresse eingeben.';
     }
 
-    if (formData.qrType === 'url') {
-      if (!urlRegex.test(formData.url.trim())) {
-        newErrors.url = 'Bitte eine gültige URL inkl. https:// eingeben.';
-      }
+    if (formData.qrType === 'url' && !urlRegex.test(formData.url.trim())) {
+      newErrors.url = 'Bitte eine gültige URL inkl. https:// eingeben.';
     }
 
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) return;
 
     onSubmit(formData);
@@ -83,100 +76,52 @@ const Form = ({ onSubmit }) => {
     <form className="form-container" onSubmit={handleSubmit} noValidate>
       <h2 className="form-title">Personendaten</h2>
 
-      {/* ANREDE */}
       <div className="form-group">
         <label>Anrede<span className="required-star">*</span></label>
-        <select
-          className="form-input"
-          name="salutation"
-          value={formData.salutation}
-          onChange={handleChange}
-        >
+        <select className="form-input" name="salutation" value={formData.salutation} onChange={handleChange}>
           <option value="frau">Frau</option>
           <option value="herr">Herr</option>
         </select>
       </div>
 
-      {/* Vorname */}
       <div className={`form-group ${errors.firstName ? 'has-error' : ''}`}>
         <label>Vorname<span className="required-star">*</span></label>
-        <input
-          className="form-input"
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
+        <input className="form-input" type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
         {errors.firstName && <span className="error-text">{errors.firstName}</span>}
       </div>
 
-      {/* Nachname */}
       <div className={`form-group ${errors.lastName ? 'has-error' : ''}`}>
         <label>Nachname<span className="required-star">*</span></label>
-        <input
-          className="form-input"
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
+        <input className="form-input" type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
         {errors.lastName && <span className="error-text">{errors.lastName}</span>}
       </div>
 
-      {/* Funktion */}
       <div className={`form-group ${errors.position ? 'has-error' : ''}`}>
         <label>Funktion<span className="required-star">*</span></label>
-        <select
-          className="form-input"
-          name="position"
-          value={formData.position}
-          onChange={handleChange}
-        >
+        <select className="form-input" name="position" value={formData.position} onChange={handleChange}>
           <option value="">Bitte auswählen</option>
           {POSITION_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
+            <option key={option} value={option}>{option}</option>
           ))}
         </select>
         {errors.position && <span className="error-text">{errors.position}</span>}
       </div>
 
-      {/* Telefon */}
       <div className={`form-group ${errors.phone ? 'has-error' : ''}`}>
         <label>Telefon<span className="required-star">*</span></label>
-        <input
-          className="form-input"
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
+        <input className="form-input" type="tel" name="phone" value={formData.phone} onChange={handleChange} />
         {errors.phone && <span className="error-text">{errors.phone}</span>}
       </div>
 
-      {/* E-Mail */}
       <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
         <label>E-Mail<span className="required-star">*</span></label>
-        <input
-          className="form-input"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+        <input className="form-input" type="email" name="email" value={formData.email} onChange={handleChange} />
         {errors.email && <span className="error-text">{errors.email}</span>}
       </div>
 
-      {/* QR-Code-Art */}
       <div className="form-group">
         <label>QR-Code-Art</label>
-        <select
-          className="form-input"
-          name="qrType"
-          value={formData.qrType}
-          onChange={handleChange}
-        >
+        <select className="form-input" name="qrType" value={formData.qrType} onChange={handleChange}>
           <option value="vcard">Kontakt (vCard)</option>
           <option value="mail">E-Mail</option>
           <option value="url">Webseite</option>
@@ -188,13 +133,7 @@ const Form = ({ onSubmit }) => {
       {formData.qrType === 'url' && (
         <div className={`form-group ${errors.url ? 'has-error' : ''}`}>
           <label>Webseite<span className="required-star">*</span></label>
-          <input
-            className="form-input"
-            type="url"
-            name="url"
-            value={formData.url}
-            onChange={handleChange}
-          />
+          <input className="form-input" type="url" name="url" value={formData.url} onChange={handleChange} />
           {errors.url && <span className="error-text">{errors.url}</span>}
         </div>
       )}

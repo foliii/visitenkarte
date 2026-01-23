@@ -2,7 +2,7 @@
 import React from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import "./style.css";
+import "./export.css";
 
 const ExportButtons = ({ previewRef, hasData }) => {
   // Nichts anzeigen, wenn noch keine Form-Daten existieren

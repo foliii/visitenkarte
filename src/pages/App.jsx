@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 
-import Form from "./form/form";
-import Visitenkarte from "./preview/visitenkarte";
-import ExportButtons from "./pdfexport/pdfexport";
+import PersonForm from "../features/form/PersonForm";
+import BusinessCard from "../features/businesscard/BusinessCard";
+import ExportButtons from "../features/export/ExportButtons";
 
 const App = () => {
   const [formData, setFormData] = useState(null);
@@ -29,9 +29,7 @@ const App = () => {
   return (
     <div className="form-qr-layout">
       <div className="left-col">
-        <Form onSubmit={handleFormSubmit} />
-
-        {/* Export-Buttons (PNG + PDF), nur anzeigen wenn Daten vorhanden */}
+        <PersonForm onSubmit={handleFormSubmit} />
         <ExportButtons previewRef={previewRef} hasData={!!formData} />
       </div>
 
@@ -41,10 +39,12 @@ const App = () => {
         <div className="qr-box">
           {formData ? (
             <div className="preview-wrap" ref={previewRef}>
-              <Visitenkarte data={formData} design={design} />
+              <BusinessCard data={formData} design={design} />
             </div>
           ) : (
-            <span className="qr-placeholder">Vorschau der Visitenkarte</span>
+            <span className="qr-placeholder">
+              Vorschau der Visitenkarte
+            </span>
           )}
         </div>
 
@@ -74,7 +74,6 @@ const App = () => {
               >
                 <option value="small">Klein</option>
                 <option value="medium">Mittel</option>
-                <option value="large">Groß</option>
               </select>
             </div>
           </div>
