@@ -51,13 +51,21 @@ END:VCARD
     }
 
     QRCode.toCanvas(
-      canvasRef.current,
-      qrContent,
-      { width: 140 },
-      (error) => {
-        if (error) console.error(error);
-      }
-    );
+    canvasRef.current,
+    qrContent,
+    {
+      width: 64,
+      margin: 0,
+      color: {
+        dark: "#0f172a",
+        light: "#ffffff",
+      },
+    },
+    (error) => {
+      if (error) console.error(error);
+    }
+  );
+
   }, [
     data.firstName,
     data.lastName,
