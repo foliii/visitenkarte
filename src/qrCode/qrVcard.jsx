@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import QRCode from 'qrcode';
+import React, { useEffect, useRef } from "react";
+import QRCode from "qrcode";
 
 const QRCodeComponent = ({ data }) => {
   const canvasRef = useRef(null);
@@ -7,36 +7,29 @@ const QRCodeComponent = ({ data }) => {
   useEffect(() => {
     if (!canvasRef.current || !data) return;
 
-    let qrContent = '';
+    let qrContent = "";
 
     switch (data.qrType) {
-      case 'mail':
-        if (!data.email) return;
-        qrContent = `mailto:${data.email}`;
-        break;
-
-      case 'url':
-        if (!data.url) return;
+      case "url":
         qrContent = data.url;
         break;
 
-      case 'location':
-        qrContent = 'geo:49.3536,9.1459';
+      case "location":
+        qrContent = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          data.locationAddress
+        )}`;
         break;
 
-      case 'event':
+      case "event":
         qrContent = `
 BEGIN:VEVENT
-SUMMARY:Business Meeting
-DTSTART:20250115T100000
-DTEND:20250115T110000
-LOCATION:DHBW Mosbach
-DESCRIPTION:Beispieltermin für Visitenkarten-QR-Code
+SUMMARY:${data.eventTitle}
+DTSTART:${data.eventDate.replace(/-/g, "")}T${data.eventTime.replace(":", "")}00
 END:VEVENT
-`.trim();
+        `.trim();
         break;
 
-      case 'vcard':
+      case "vcard":
       default:
         qrContent = `
 BEGIN:VCARD
@@ -44,39 +37,16 @@ VERSION:3.0
 N:${data.lastName};${data.firstName}
 FN:${data.firstName} ${data.lastName}
 TITLE:${data.position}
-${data.phone ? `TEL;TYPE=CELL:${data.phone}` : ''}
-${data.email ? `EMAIL;TYPE=INTERNET:${data.email}` : ''}
+TEL:${data.phone}
+EMAIL:${data.email}
 END:VCARD
-`.trim();
+        `.trim();
     }
 
-    QRCode.toCanvas(
-    canvasRef.current,
-    qrContent,
-    {
-      width: 64,
-      margin: 0,
-      color: {
-        dark: "#0f172a",
-        light: "#ffffff",
-      },
-    },
-    (error) => {
-      if (error) console.error(error);
-    }
-  );
+    QRCode.toCanvas(canvasRef.current, qrContent, { width: 72 });
+  }, [data]);
 
-  }, [
-    data.firstName,
-    data.lastName,
-    data.position,
-    data.phone,
-    data.email,
-    data.url,
-    data.qrType
-  ]);
-
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} />;
 };
 
 export default QRCodeComponent;
