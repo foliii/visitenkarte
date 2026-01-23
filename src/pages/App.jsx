@@ -8,9 +8,10 @@ const App = () => {
   const [formData, setFormData] = useState(null);
 
   const [design, setDesign] = useState({
-    fontFamily: "Arial",
-    fontSize: "medium",
+  fontFamily: "Inter",
+  fontSize: "medium",
   });
+
 
   const previewRef = useRef(null);
 
@@ -29,7 +30,12 @@ const App = () => {
   return (
     <div className="form-qr-layout">
       <div className="left-col">
-        <PersonForm onSubmit={handleFormSubmit} />
+        <PersonForm
+          onSubmit={handleFormSubmit}
+          hasCard={!!formData}
+        />
+
+
         <ExportButtons previewRef={previewRef} hasData={!!formData} />
       </div>
 
@@ -58,10 +64,12 @@ const App = () => {
                 name="fontFamily"
                 value={design.fontFamily}
                 onChange={handleDesignChange}
-              >
-                <option value="Arial">Arial</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Courier New">Courier New</option>
+>
+                <option value="Inter">Inter</option>
+                <option value="Roboto">Roboto</option>
+                <option value="Poppins">Poppins</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Source Sans 3">Source Sans 3</option>
               </select>
             </div>
 
