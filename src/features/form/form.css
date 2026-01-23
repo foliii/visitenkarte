@@ -25,7 +25,7 @@ html, body {
 .form-qr-layout {
   position: relative;
   display: flex;
-  gap: 48px;
+  gap: 32px;
   width: 100%;
   max-width: 1400px;
   padding: 0 40px;
@@ -61,17 +61,23 @@ html, body {
 
 .form-container {
   flex: 1;
-  max-width: 480px;
-  padding: 28px 26px;
-  background: rgba(5, 10, 18, 0.95);
-  border-radius: 14px;
+  max-width: 600px;              
+  padding: 40px 50px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  background: rgba(5, 10, 18, 0.96);
+  border-radius: 18px;
   border: 1px solid #1F2A3A;
+
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.75),
-    inset 0 0 14px rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    0 22px 55px rgba(0, 0, 0, 0.85),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+
+  box-sizing: border-box;
 }
+
+
 
 .form-title {
   font-size: 22px;
@@ -162,7 +168,6 @@ html, body {
   align-items: stretch;
 }
 
-
 .qr-title {
   font-size: 16px;
   font-weight: 600;
@@ -189,7 +194,7 @@ html, body {
   transform-origin: top center;
 }
 
-/* ===== STATES ===== */
+/* ===== STATES */
 
 .required-star {
   color: #ff6b6b;
@@ -206,9 +211,57 @@ html, body {
   color: #ff6b6b;
 }
 
-/* ===== ANIMATION ===== */
+/* ANIMATION */
 
 @keyframes glowPulse {
   from { opacity: 0.7; transform: translateY(0); }
   to   { opacity: 1; transform: translateY(-8px); }
+}
+
+/* DESIGN-KONTROLLEN */
+
+.design-card {
+  margin-top: 24px;
+  padding: 20px 22px;
+  background: rgba(10, 16, 30, 0.9);
+  border-radius: 14px;
+  border: 1px solid #1F2A3A;
+}
+
+.design-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E5ECF9;
+}
+
+.design-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.design-row label {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C7D2FE;
+}
+
+.design-row select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #2A3649;
+  background: #141B28;
+  color: #F5F7FA;
+}
+
+.design-row select:focus {
+  outline: none;
+  border-color: #2F6CCF;
+  box-shadow: 0 0 0 2px rgba(47, 108, 207, 0.45);
 }
